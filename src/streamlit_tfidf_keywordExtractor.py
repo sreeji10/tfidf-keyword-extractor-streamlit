@@ -3,6 +3,8 @@ import pandas as pd
 import pickle
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
+from pathlib import Path
+
 
 #Setting up Streamlit configurations
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
@@ -14,9 +16,9 @@ Text = st.text_input('Enter the sentence & press enter key')
 @st.cache(allow_output_mutation=True)
 def load():
 	''' Load the calculated TFIDF weights'''
-
 	data = None
-	with open('../data/tfidf.pickle', 'rb') as f:
+	pkl_path = Path(__file__).parents[1] / 'data/tfidf.pickle'
+	with open(pkl_path, 'rb') as f:
 		data = pickle.load(f)
 	return data
 
